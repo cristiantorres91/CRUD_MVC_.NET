@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<center><h2>Datos Personas</h2></center>
+<!-- Boton Nuevo  -->
+<div class=" row" style="text-align:right; padding:5px">
+    <div class="col-md-12">
+        <input type="button" class="btn btn-primary" value="Nuevo" onclick="document.location.href='@Url.Content("~/Persona/Nuevo")'" />
+    </div>
+</div>
+<!-- Creo tabla  -->
+<div class="row">
+    <div class="col-md-12">
+
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>NOMBRE</th>
+                    <th>APELLIDO</th>
+                    <th>EDAD</th>
+                    <th>Editar/Eliminar</th>
+                </tr>
+            </thead>
+            <!-- Recorro el modelo para imprimir datos -->
+            @foreach (var elemento in Model)
+            {
+                <tr>
+                    <td>@elemento.Id</td>
+                    <td>@elemento.Nombre</td>
+                    <td>@elemento.Apellido</td>
+                    <td>@elemento.Edad</td>
+
+                    <td>
+                        <!-- Botones Editar Eliminar  -->
+                        <input type="button" onclick="document.location.href='@Url.Content("~/Persona/Editar/"+elemento.Id)'" value="Editar" class="btn btn-default" />
+                        <input type="button" onclick="jsEliminar(@elemento.Id);" class="btn btn-danger" value="Eliminar" />
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script>
+    function jsEliminar(id) {
+        if (confirm("Quieres Eliminar El Registro?")) {
+            url = "@Url.Content("~/Persona/Eliminar")" + "/"+id; //metodo Eliminar Controller
+
+            $.post(url, function (data) {
+                
+                if (data=="ok") {
+                    document.location.href = "@Url.Content("~/Persona/")"
+                    console.log("Exito");
+                } else {
+                    alert("No se pudo Eliminar El registro");
+                }
+
+            })
+        }
+    }
+</script>
+

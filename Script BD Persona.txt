@@ -1,0 +1,16 @@
+--1. Crear Base de Datos
+CREATE DATABASE Persona
+USE Persona
+go
+
+--2. Crear Tabla
+--CREATE TABLE Persona
+--(
+--	Id int primary key identity(1,1),
+--	Nombre varchar(50),
+--	Apellido varchar(50),
+--	Edad int
+--)
+
+--3. Insertar Registro
+--insert into Persona values('Juan','Perez',50)
